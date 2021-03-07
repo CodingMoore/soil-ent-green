@@ -42,3 +42,7 @@ Work_log
 5:25 - 6:15: Creating React Diagram.
 
 
+2021-03-07
+
+12:00 - : Building out static react site.
+
