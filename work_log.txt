@@ -44,5 +44,7 @@ Work_log
 
 2021-03-07
 
-12:00 - : Building out static react site.
+12:00 - 4:30: Building out static react site.
+
+4:30 - 6:00: Connecting Firebase kinda.
 
