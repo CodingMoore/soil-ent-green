@@ -7,7 +7,8 @@ function EditPlant() {
     <>
       <hr/>
       <p class="compBound">EditPlant Start</p>
-      <ReusableForm />
+      <ReusableForm 
+      buttonText = "Edit Plant"/>
       <p class="compBound">EditPlant End</p>
       <hr/>
     </>

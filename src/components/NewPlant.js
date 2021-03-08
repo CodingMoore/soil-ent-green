@@ -17,7 +17,8 @@ function NewPlant(props) {
     <>
       <hr/>
       <p class="compBound">NewPlant Start</p>
-      <ReusableForm />
+      <ReusableForm 
+      buttonText = "Add New Plant"/>
       <p class="compBound">NewPlant End</p>
       <hr/>
     </>
