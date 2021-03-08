@@ -48,3 +48,7 @@ Work_log
 
 4:30 - 6:00: Connecting Firebase kinda.
 
+
+2021-03-07
+
+9:30 - : Continue to integrate firebase into the react project.

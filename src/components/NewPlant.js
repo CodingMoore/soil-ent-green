@@ -9,9 +9,10 @@ const db = firebase.database();
 function NewPlant() {
   function addPlantToFirebase(event) {
     event.preventDefault();
-    const plantRef = db.ref("plants");
-    const newPlantRef = plantRef.push();
-    newPlantRef.set(
+    // const plantRef = db.ref("plants");
+    // const newPlantRef = plantRef.push();
+    // newPlantRef.set(
+    let data =
       {
         plantName: event.target.plantName.value,
         yellowAlertAt: event.target.yellowAlertAt.value,
@@ -20,7 +21,7 @@ function NewPlant() {
         birthDate: event.target.birthDate.value,
         notes: event.target.notes.value
       }
-    );
+    db.ref("plants").child("username2").child("UniquePlantName2").push(data)
   }
   
   return(
