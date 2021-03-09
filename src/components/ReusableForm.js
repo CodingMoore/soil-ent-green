@@ -12,30 +12,30 @@ function ReusableForm(props) {
         type = "text"
         name = "plantName" />
         <br/>
-        <label for="plantName">Yellow Alert Level: </label> 
-        <input
-        type = "text"
-        name = "yellowAlertAt" />
-        <br/>
-        <label for="plantName">Red Alert Level: </label> 
-        <input
-        type = "text"
-        name = "redAlertAt" />
-        <br/>
-        <label for="plantName">Species: </label> 
+        <label for="species">Species: </label> 
         <input
         type = "text"
         name = "species" />
         <br/>
-        <label for="plantName">Birth Date: </label> 
-        <input
-        type = "text"
-        name = "birthDate" />
-        <br/>
-        <label for="plantName">Notes: </label> 
+        <label for="notes">Notes: </label> 
         <input
         type = "text"
         name = "notes" />
+        <br/>
+        <label for="yellowAlertAt">Yellow Alert Level: </label> 
+        <input
+        type = "text"
+        name = "yellowAlertAt" />
+        <br/>
+        <label for="redAlertAt">Red Alert Level: </label> 
+        <input
+        type = "text"
+        name = "redAlertAt" />
+        <br/>
+        <label for="hardwareCode">Hardware Code: </label> 
+        <input
+        type = "text"
+        name = "hardwareCode" />
         <br/>
         <button type="submit">{props.buttonText}</button>
       </form>

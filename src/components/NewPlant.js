@@ -1,27 +1,26 @@
 import React from "react";
 import ReusableForm from "./ReusableForm";
-import { useFirebase } from "react-redux-firebase";
-import { useState } from "react";
-import firebase from "../firebase";
+import PropTypes from "prop-types";
+import { useFirestore } from "react-redux-firebase";
 
-const db = firebase.database();
-
-function NewPlant() {
+function NewPlant(props) {
+  const firestore = useFirestore();
   function addPlantToFirebase(event) {
     event.preventDefault();
+    props.onNewPlantCreation();
     // const plantRef = db.ref("plants");
     // const newPlantRef = plantRef.push();
     // newPlantRef.set(
-    let data =
+    return firestore.collection("plants").doc("userName1").collection("userPlants").add(  
       {
         plantName: event.target.plantName.value,
+        species: event.target.species.value,
+        notes: event.target.notes.value,
         yellowAlertAt: event.target.yellowAlertAt.value,
         redAlertAt: event.target.redAlertAt.value,
-        species: event.target.species.value,
-        birthDate: event.target.birthDate.value,
-        notes: event.target.notes.value
+        hardwareCode: event.target.hardwareCode.value
       }
-    db.ref("plants").child("username2").child("UniquePlantName2").push(data)
+    );
   }
   
   return(
@@ -36,5 +35,9 @@ function NewPlant() {
     </>
   );
 }
+
+NewPlant.propTypes = {
+  onNewPlantCreation: PropTypes.func
+};
 
 export default NewPlant;

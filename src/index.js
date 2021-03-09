@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-// import { createFirestoreInstance } from "redux-firestore"; - Probably unnecessary since I am using Firebase real-time database instead of firestore
+import { createFirestoreInstance } from "redux-firestore";
 import firebase from "./firebase";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -18,7 +18,7 @@ const rrfProps = {
         userProfile: "users"
   },
   dispatch: store.dispatch,
-  //createFirestoreInstance  - Probably unnecessary since I am using Firebase real-time database
+  createFirestoreInstance
 }
 
 ReactDOM.render(

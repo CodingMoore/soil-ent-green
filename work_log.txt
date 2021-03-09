@@ -51,4 +51,20 @@ Work_log
 
 2021-03-07
 
-9:30 - : Continue to integrate firebase into the react project.
+9:30 - 12:00: Continue to integrate firebase into the react project and adjust Plant properties.
+
+12:00 - 1:15: Chipotle
+
+1:15 - 3:40: Beating head against keyboard due to stupid impossible firebase get() syntax. 
+
+3:40 - 4:05: Vacuuming Ants
+
+4:05 - 7:10: Trying to create an object out of retreived data.  Might actually be impossible with a firebase realtime database.
+
+
+2021-01-09
+
+6:15 - 8:00: Researching how to convert my python files from a realtime database to firestore. Also doing the conversion.
+
+8:00 - : converting react project from firebase realtime database to firestore.
+

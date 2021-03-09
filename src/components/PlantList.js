@@ -1,49 +1,58 @@
 import React from "react";
 import Plant from "./Plant";
 import PlantStatus from "./PlantStatus";
+import firebase from "../firebase";
 
-const masterPlantList = [
-  {
-    plantName: "Kiki",
-    yellowAlertAt: "50",
-    redAlertAt: "25",
-    species: "Pathos",
-    birthDate: "03-01-2021",
-    notes: "Hangs by main livingroom window."
-  },
-  {
-    plantName: "Alijandro",
-    yellowAlertAt: "30",
-    redAlertAt: "10",
-    species: "Fish-Tail Palm",
-    birthDate: "01-10-2021",
-    notes: "In the large blue pot by the stairs."
+
+class PlantList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayList: [{
+        plantName: "No Plant"
+      }]
+    }
   }
-]
 
+  // const plant = document.getElementById('object');
+  componentDidMount() { 
+  const db = firebase.database();
+  const ref = db.ref("plants").child("userName1");
 
-function PlantList() {
-  return (
-    <>
-      <hr/>
-      <p class="compBound">PlantList Start</p>
-      {masterPlantList.map((plant, index) =>
-      <Plant 
-      // whenPlantClicked = { props.onPlantSelection }
-      plantName = {"Name: " + plant.plantName}
-      yellowAlertAt = {"Yellow Alert Level: " + plant.yellowAlertAt}
-      redAlertAt = {"Red Alert Level: " + plant.redAlertAt}
-      species = {"Species: " + plant.species}
-      birthDate = {"Birth Date: " + plant.birthDate}
-      notes = {"Notes: " + plant.notes}
-      // id = {plant.id}
-      key = {index}/>
-      )}
-      <PlantStatus />
-      <p class="compBound">PlantList End</p>
-      <hr/>
-    </>
-  );
+  ref.on("value", function(snapshot) {
+    console.log(snapshot.val());  
+  }, 
+  
+  function (errorObject) {
+    console.log("The read failed: " + errorObject.code)
+  });
+  console.log(this.state.displayList);
+  };
+  
+
+  render() {
+    if (this.state.displayList === null) {
+      return <Plant plantName = {"You have not added a plant."}/>
+    }else {
+      return (
+        <>
+          <hr/>
+          <p class="compBound">PlantList Start</p>
+          {this.state.displayList.map((plant) =>
+            <Plant 
+            // whenPlantClicked = { props.onPlantSelection }
+            plantName = { "Name: " + plant.plantName }
+            species = { "Species: " + plant.species }
+            id = { plant.id }
+            key = { plant.id }/>
+          )}
+          <PlantStatus />
+          <p class="compBound">PlantList End</p>
+          <hr/>
+        </>
+      );
+    }
+  }
 }
 
 export default PlantList; 
