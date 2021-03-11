@@ -84,4 +84,4 @@ Work_log
 
 2021-01-11
 
-9:00 - :
+9:00 - 10:30: Attempt to get data out of firestore.
