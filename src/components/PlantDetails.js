@@ -7,7 +7,7 @@ function PlantDetails() {
     <>
       <hr/>
       <p class="compBound">PlantDetails Start</p>
-      <PlantGraph />
+      {/* <PlantGraph /> */}
       <p class="compBound">PlantDetails End</p>
       <hr/>
     </>

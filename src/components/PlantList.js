@@ -1,58 +1,55 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Plant from "./Plant";
 import PlantStatus from "./PlantStatus";
-import firebase from "../firebase";
+import { useSelector } from "react-redux";
+import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase"; 
 
-
-class PlantList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayList: [{
-        plantName: "No Plant"
-      }]
-    }
-  }
-
-  // const plant = document.getElementById('object');
-  componentDidMount() { 
-  const db = firebase.database();
-  const ref = db.ref("plants").child("userName1");
-
-  ref.on("value", function(snapshot) {
-    console.log(snapshot.val());  
-  }, 
-  
-  function (errorObject) {
-    console.log("The read failed: " + errorObject.code)
-  });
-  console.log(this.state.displayList);
-  };
+function PlantList (props) {
+  const userEmail = props.auth.currentUser.email;
+  useFirestoreConnect([
+    { collection: "plants" }
+  ]);
+  const plants = useSelector(state => state.firestore.ordered.plants);
+  // console.log(plants);
   
 
-  render() {
-    if (this.state.displayList === null) {
-      return <Plant plantName = {"You have not added a plant."}/>
-    }else {
-      return (
-        <>
-          <hr/>
-          <p class="compBound">PlantList Start</p>
-          {this.state.displayList.map((plant) =>
-            <Plant 
-            // whenPlantClicked = { props.onPlantSelection }
-            plantName = { "Name: " + plant.plantName }
-            species = { "Species: " + plant.species }
-            id = { plant.id }
-            key = { plant.id }/>
-          )}
-          <PlantStatus />
-          <p class="compBound">PlantList End</p>
-          <hr/>
-        </>
-      );
-    }
+  // function filter(arg) {
+  //   for (let i=0; i<Object.keys(arg).length; i++) {
+
+  //   }
+  // }
+  // const filteredPlants = filter(plants);
+
+  if (isLoaded(plants)) {
+    return (
+      <>
+        <hr/>
+        {plants.map((plant) => {
+          // const plantData = Object.keys(plant)
+          // console.log(plantData);
+          return <Plant 
+          whenPlantClicked = { props.onPlantSelection }
+          plantName = { "Name: " + plant.plantName }
+          species = { "Species: " + plant.species }
+          id = { plant.id }
+          key = { plant.id }/>
+          })
+        }
+        <PlantStatus />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <h3>Loading...</h3>
+      </>
+    )
   }
 }
+
+PlantList.propTypes = {
+  onPlantSelection: PropTypes.func
+};
 
 export default PlantList; 

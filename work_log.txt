@@ -66,5 +66,22 @@ Work_log
 
 6:15 - 8:00: Researching how to convert my python files from a realtime database to firestore. Also doing the conversion.
 
-8:00 - : converting react project from firebase realtime database to firestore.
+8:00 - 9:30: converting react project from firebase realtime database to firestore.
 
+9:30 - 10:30: Add signIn signUp and signOut auth functionality
+
+10:30 - 2:00: Bang head on wall while trying to get data out of firestore.
+
+
+2021-01-10
+
+8:30 - 12:00: Attempt to get data out of firestore.
+
+12:00 - 1:00: lunch
+
+1:00 - 8:30: Attempt to get data out of firestore.
+
+
+2021-01-11
+
+9:00 - :

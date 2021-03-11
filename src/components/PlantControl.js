@@ -3,7 +3,11 @@ import PlantList from "./PlantList";
 import PlantDetails from "./PlantDetails";
 import NewPlant from "./NewPlant";
 import EditPlant from "./EditPlant";
-import { firebaseConnect } from "react-redux-firebase";
+import PlantGraph from "./PlantGraph";
+import { firebaseConnect, withFirestore, isLoaded } from "react-redux-firebase";
+import { connect } from "react-redux";
+
+
 
 class PlantControl extends React.Component {
 
@@ -13,7 +17,7 @@ class PlantControl extends React.Component {
       selectedPlant: { //null when selected plant isn't automatically shown.
         name: "Placeholder",
         species: "Placeholder",
-        notes: "nPlaceholder",
+        notes: "Placeholder",
         yellowAlertAt: "Placeholder",
         redAlertAt: "Placeholder",
         machineCode: "Placeholder"
@@ -22,11 +26,14 @@ class PlantControl extends React.Component {
     }
   }
 
+  //second argument in setState is to deal with Async nature of setState.
   handleChangingSelectedPlant = (id) => {
     const newSelectedPlant = firebaseConnect.database().ref().on("");
-    this.setState({selectedPlant: newSelectedPlant});
+    this.setState({selectedPlant: newSelectedPlant}, () => {
+      console.log(this.state.selectedPlant);
+    });
 
-    console.log(this.state.selectedPlant);
+    
   }
 
   handleAddingNewPlantToList = () => {
@@ -35,23 +42,49 @@ class PlantControl extends React.Component {
   }
 
   render() {
-    return (
-      <>
-        <hr/>
-        <p class="compBound">PlantControl Start</p>
-          <PlantList 
-          onPlantSelection = { this.handleChangingSelectedPlant }/>
-          <PlantDetails />
-          <NewPlant onNewPlantCreation = { this.handleAddingNewPlantToList }/>
-          <EditPlant />
-        <p class="compBound">PlantControl End</p>
-        <hr/>
-      </>
-    );
+    const auth = this.props.firebase.auth();
+    if (!isLoaded(auth)) {
+      return (
+        <>
+          <h1>Loading...</h1>
+        </>
+      )
+    }
+    if ((isLoaded(auth)) && (auth.currentUser == null)) {
+      return (
+        <>
+          <h1>You must be signed in to access your plants.</h1>
+        </>
+      )
+    }
+    if((isLoaded(auth)) && (auth.currentUser != null)) {
+      return (
+        <>
+          <hr/>
+          <p class="compBound">PlantControl Start</p>
+            <PlantList auth = { this.props.firebase.auth() }
+            onPlantSelection = { this.handleChangingSelectedPlant }/>
+            <PlantDetails />
+            <NewPlant 
+            auth = { this.props.firebase.auth() }
+            onNewPlantCreation = { this.handleAddingNewPlantToList }/>
+            <PlantGraph />
+            <EditPlant />
+          <p class="compBound">PlantControl End</p>
+          <hr/>
+        </>
+      );
+    }
   }
 
 }
 
+const mapStateToProps = state => {
+  return {
+    
+  }
+}
 
+PlantControl = connect(mapStateToProps)(PlantControl);
 
-export default PlantControl;
+export default withFirestore(PlantControl);
