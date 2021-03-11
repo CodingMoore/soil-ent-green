@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CanvasJSReact from "./../canvasjs.react";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
@@ -22,12 +22,16 @@ class PlantGraph extends React.Component {
   }
 
   componentDidMount() {
-    // this.waitTimeUpdateTimer = setInterval(() =>
-    //   this.updateTicketElapsedWaitTime(),
-    // 60000
-    // );
+  //   // this.waitTimeUpdateTimer = setInterval(() =>
+  //   //   this.updateTicketElapsedWaitTime(),
+  //   // 60000
+  //   // );
     this.getSoilData();
   }
+
+  // useEffect(() => {
+  //   this.getSoilData();
+  // }, []);
 
   // useFirestoreConnect([
   //   { collection: "hardware" }
