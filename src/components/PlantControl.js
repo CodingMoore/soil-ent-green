@@ -5,7 +5,8 @@ import NewPlant from "./NewPlant";
 import EditPlant from "./EditPlant";
 import PlantGraph from "./PlantGraph";
 import { firebaseConnect, withFirestore, isLoaded } from "react-redux-firebase";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+import db from "../firebase";
 
 
 
@@ -36,13 +37,14 @@ class PlantControl extends React.Component {
     
   }
 
-  handleAddingNewPlantToList = () => {
-    const { dispatch } = this.props;
-    //TBD
-  }
+  // handleAddingNewPlantToList = () => {
+  //   const { dispatch } = this.props;
+  //   //TBD
+  // }
 
   render() {
-    const auth = this.props.firebase.auth();
+    // const auth = this.props.firebase.auth();
+    const auth = db.auth();
     if (!isLoaded(auth)) {
       return (
         <>
@@ -61,16 +63,17 @@ class PlantControl extends React.Component {
       return (
         <>
           <hr/>
-          <p class="compBound">PlantControl Start</p>
-            <PlantList auth = { this.props.firebase.auth() }
-            onPlantSelection = { this.handleChangingSelectedPlant }/>
+          <p className="compBound">PlantControl Start</p>
+            {/* <PlantList auth = { this.props.firebase.auth() }
+            onPlantSelection = { this.handleChangingSelectedPlant }/> */}
             <PlantDetails />
-            <NewPlant 
-            auth = { this.props.firebase.auth() }
-            onNewPlantCreation = { this.handleAddingNewPlantToList }/>
+            {/* <NewPlant 
+            
+            auth={auth}
+            onNewPlantCreation = { this.handleAddingNewPlantToList }/> */}
             <PlantGraph />
             <EditPlant />
-          <p class="compBound">PlantControl End</p>
+          <p className="compBound">PlantControl End</p>
           <hr/>
         </>
       );
@@ -79,12 +82,16 @@ class PlantControl extends React.Component {
 
 }
 
-const mapStateToProps = state => {
-  return {
+// {/* auth = { this.props.firebase.auth() } */}
+
+// const mapStateToProps = state => {
+//   return {
     
-  }
-}
+//   }
+// }
 
-PlantControl = connect(mapStateToProps)(PlantControl);
+// PlantControl = connect(mapStateToProps)(PlantControl);
 
-export default withFirestore(PlantControl);
+// export default withFirestore(PlantControl);
+
+export default PlantControl;

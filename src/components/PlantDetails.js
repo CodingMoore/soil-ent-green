@@ -6,9 +6,9 @@ function PlantDetails() {
   return (
     <>
       <hr/>
-      <p class="compBound">PlantDetails Start</p>
+      <p className="compBound">PlantDetails Start</p>
       {/* <PlantGraph /> */}
-      <p class="compBound">PlantDetails End</p>
+      <p className="compBound">PlantDetails End</p>
       <hr/>
     </>
   );
